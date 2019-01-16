@@ -35,7 +35,8 @@ if not os.path.exists(dirdstpath):
     os.makedirs('dst')
 ofilename = cfg_file['src_f_org']   # orignal filename
 mfilename = cfg_file['src_f_map']   # map v-i filename
-nfilename = cfg_file['dst_f_new']   # new filename
+nfilename = cfg_file['dst_f_new']   # new filename(+)
+dfilename = cfg_file['dst_f_new_d']  # new filename(-)
 afilename = cfg_file['dst_f_all']   # all filename
 
 cfg_graphic = cfg.Config().get('graphic')
@@ -129,6 +130,17 @@ def transitionfunc():
 
     # write V sets, Q sets, V' sets , Q' sets
     try:
+        with open(dirdstpath+dfilename, mode='w',newline='') as csv_file:
+            fieldnames = ["V", "I'"]
+            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+            writer.writeheader()
+            for i,v in enumerate(_V):
+                writer.writerow({"V":_VFEd[i], "I'":_I[i]})
+    except:
+        print("The file is used by your system!\nYou must have to close it, and restart this program again .")
+
+    # write V sets, Q sets, V' sets , Q' sets
+    try:
         with open(dirdstpath+afilename, mode='w',newline='') as csv_file:
             fieldnames = ["V", "Q", "Vd", "Vo'", "Ve", "Vm'", "I'"]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
@@ -178,6 +190,7 @@ def test():
     print("Vmap:",_Vmap,"\nImap:",_Imap,"\n")
     print("Vo:",_VFE,"\n")
     print("V':",_VFEm,"\nI':",_I,"\n")
+    print("Vd':",_VFEd,"\n")
 
 ### 主程式 ###
 if __name__ == '__main__':
