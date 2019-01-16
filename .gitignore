@@ -1,4 +1,8 @@
-*.csv
+\lib\__pycache__
+\dst
 *.txt
 *.xls
 *.xlsx
+*.jpg
+*.png
+*.pyc
