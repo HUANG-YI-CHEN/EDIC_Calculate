@@ -135,7 +135,7 @@ def transitionfunc():
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader()
             for i,v in enumerate(_V):
-                writer.writerow({"V":_VFEd[i], "I'":_I[i]})
+                writer.writerow({"V":_VFEe[i], "I'":_I[i]})
     except:
         print("The file is used by your system!\nYou must have to close it, and restart this program again .")
 
